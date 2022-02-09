@@ -1,13 +1,18 @@
+// Styles
 import "./App.css";
+// Router
+// import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 // Components
 import WeatherCard from "./components/WeatherCard";
 import LocalWeather from "./components/LocalWeather";
+import SearchedWeather from "./components/SearchedWeather";
+import SearchBar from "./components/SearchBar";
 // Hooks
 import useSearchForecast from "./hooks/useSearchForecast";
 import useLocalForecast from "./hooks/useLocalForecast";
 
 function App() {
-  const { weather, isLoaded, error } = useSearchForecast();
+  const { weather, isLoaded, error, city } = useSearchForecast();
   const { localWeather } = useLocalForecast();
 
   if (error) {
@@ -15,10 +20,27 @@ function App() {
       <p>Error: {error}</p>
     </div>;
   }
+
+  const bgToggle = () => {
+    const isDay = weather.current.is_day;
+    console.log(isDay);
+    if (isDay === 1) {
+      return "__day";
+    } else {
+      return "__night";
+    }
+  };
+
   return (
-    <div className="App">
-      {/* {isLoaded ? <WeatherCard weather={weather} /> : <p>Is loading...</p>} */}
-      <LocalWeather weather={localWeather} />
+    // <div className={`container${bgToggle()}`}>
+    <div className={`container}`}>
+      <SearchBar />
+      <SearchedWeather />
+      {/* {city === true ? <SearchedWeather /> : <LocalWeather />} */}
+      {/* <Routes>
+        <Route path="/" element={<LocalWeather />} />
+        <Route path="/search/:queryText" element={<SearchedWeather />} />
+      </Routes> */}
     </div>
   );
 }
@@ -27,16 +49,12 @@ export default App;
 
 /*
 
-Wednesday 9th Feb:
+Thursday 10th Feb:
 
-- Create local api request custom hook - IN PROGRESS
- - Latitude and longitude not coming through - fix this issue first. 
-- Write a condition:
-    if there is no search data ? show default local data : show search
-     - how would I include the loading component as well? 
+- Why is the API call taking so long? 
+- Fix search function (if struggling, concentrate on local weather)
 
-Backlog
-- Create background colour change based on time of day 
+
 
 1. Set up GIT - DONE
 2. Make first commit - DONE
