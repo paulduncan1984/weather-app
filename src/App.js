@@ -1,7 +1,7 @@
 // Styles
 import "./App.css";
 // Router
-// import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 // Components
 import WeatherCard from "./components/WeatherCard";
 import LocalWeather from "./components/LocalWeather";
@@ -35,12 +35,14 @@ function App() {
     // <div className={`container${bgToggle()}`}>
     <div className={`container}`}>
       <SearchBar />
-      <SearchedWeather />
+      {/* <LocalWeather />
+      <SearchedWeather /> */}
+      {/* <SearchedWeather /> */}
       {/* {city === true ? <SearchedWeather /> : <LocalWeather />} */}
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<LocalWeather />} />
         <Route path="/search/:queryText" element={<SearchedWeather />} />
-      </Routes> */}
+      </Routes>
     </div>
   );
 }
@@ -49,10 +51,12 @@ export default App;
 
 /*
 
-Thursday 10th Feb:
+Friday 11th Feb:
 
-- Why is the API call taking so long? 
-- Fix search function (if struggling, concentrate on local weather)
+- Styling: 
+  - Layout using flexbox 
+  - Build WeatherCard out
+
 
 
 

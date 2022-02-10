@@ -8,29 +8,51 @@ function useSearchForecast(queryText) {
   const [weather, setWeather] = useState(null);
   const [isLoaded, setIsloaded] = useState(false);
   const [error, setError] = useState(null);
-  const [city, setCity] = useState(null);
+
+  console.log("Fired");
+
+  // useEffect(() => {
+  //   setIsloaded(false);
+  //   const fetchWeather = async () => {
+  //     await axios
+  //       .get(`${BASE_URL}`, {
+  //         params: {
+  //           q: queryText,
+  //           key: API_KEY,
+  //           days: 5,
+  //           lang: "en",
+  //         },
+  //       })
+  //       .then((res) => {
+  //         setWeather(res.data);
+  //         setIsloaded(true);
+  //         console.log(res.data);
+  //       });
+  //   };
+  //   fetchWeather();
+  // }, [queryText]);
 
   useEffect(() => {
-    const fetchWeather = async () => {
-      await axios
-        .get(`${BASE_URL}`, {
-          params: {
-            q: queryText,
-            key: API_KEY,
-            days: 5,
-            lang: "en",
-          },
-        })
-        .then((res) => {
-          setIsloaded(true);
-          setWeather(res.data);
-          console.log(res.data);
-        });
-    };
-    fetchWeather();
+    console.log("useEffect started");
+    setIsloaded(false);
+    axios
+      .get(BASE_URL, {
+        params: {
+          q: queryText,
+          key: API_KEY,
+          days: 5,
+          lang: "en",
+        },
+      })
+      .then((res) => {
+        setWeather(res.data);
+        setIsloaded(true);
+        console.log("Is loaded = true");
+        console.log(res.data);
+      });
   }, [queryText]);
 
-  return { weather, isLoaded, error, city };
+  return { weather, isLoaded, error };
 }
 
 export default useSearchForecast;

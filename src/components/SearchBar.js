@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SearchedWeather from "./SearchedWeather";
+import useSearchForecast from "../hooks/useSearchForecast";
 
 function SearchBar() {
-  const [queryText, setQueryText] = useState(null);
-  //   const navigate = useNavigate();
+  const [queryText, setQueryText] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setQueryText(e.target.value);
-    console.log(queryText);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(queryText);
+    navigate(`/search/${queryText}`);
+    return <SearchedWeather />;
   };
   return (
     <div>

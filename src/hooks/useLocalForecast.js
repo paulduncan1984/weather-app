@@ -12,11 +12,12 @@ function useLocalForecast() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    setIsloaded(false);
     const fetchLocalWeather = async () => {
-      navigator.geolocation.getCurrentPosition((position) => {
+      window.navigator.geolocation.getCurrentPosition((position) => {
         setLat(position.coords.latitude);
         setLong(position.coords.longitude);
-        console.log(lat, long);
+        // console.log(lat, long);
       });
 
       await axios
@@ -29,13 +30,13 @@ function useLocalForecast() {
           },
         })
         .then((res) => {
-          setIsloaded(true);
           setLocalWeather(res.data);
-          console.log(res.data);
+          setIsloaded(true);
+          //   console.log(res.data);
         });
     };
     fetchLocalWeather();
-  }, []);
+  }, [lat, long]);
 
   return { localWeather, isLoaded, error };
 }
