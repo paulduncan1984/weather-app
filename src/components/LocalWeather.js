@@ -7,7 +7,6 @@ function LocalWeather({ ...props }) {
 
   return (
     <div>
-      <h1>LocalWeather</h1>
       {isLoaded ? <WeatherCard data={localWeather} /> : <p>Is loading...</p>}
     </div>
   );

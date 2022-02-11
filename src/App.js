@@ -1,44 +1,11 @@
-// Styles
 import "./App.css";
-// Router
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-// Components
-import WeatherCard from "./components/WeatherCard";
 import LocalWeather from "./components/LocalWeather";
 import SearchedWeather from "./components/SearchedWeather";
-import SearchBar from "./components/SearchBar";
-// Hooks
-import useSearchForecast from "./hooks/useSearchForecast";
-import useLocalForecast from "./hooks/useLocalForecast";
 
 function App() {
-  const { weather, isLoaded, error, city } = useSearchForecast();
-  const { localWeather } = useLocalForecast();
-
-  if (error) {
-    <div>
-      <p>Error: {error}</p>
-    </div>;
-  }
-
-  const bgToggle = () => {
-    const isDay = weather.current.is_day;
-    console.log(isDay);
-    if (isDay === 1) {
-      return "__day";
-    } else {
-      return "__night";
-    }
-  };
-
   return (
-    // <div className={`container${bgToggle()}`}>
-    <div className={`container}`}>
-      <SearchBar />
-      {/* <LocalWeather />
-      <SearchedWeather /> */}
-      {/* <SearchedWeather /> */}
-      {/* {city === true ? <SearchedWeather /> : <LocalWeather />} */}
+    <div className="container">
       <Routes>
         <Route path="/" element={<LocalWeather />} />
         <Route path="/search/:queryText" element={<SearchedWeather />} />
@@ -52,6 +19,14 @@ export default App;
 /*
 
 Friday 11th Feb:
+
+- Show local weather by default and search on submit - DONE
+- Get background toggle working - DONE
+
+Backlog
+ - Add button (map icon) to return to home (default view)
+ - Add 3 day forecast
+ - Add loading component
 
 - Styling: 
   - Layout using flexbox 

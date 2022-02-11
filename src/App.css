@@ -21,20 +21,20 @@ body {
   color: #333;
 }
 
-.container {
+.weatherCard {
   text-align: center;
 }
 
-.container__day {
+.weatherCard__day {
   text-align: center;
-  background-color: antiquewhite;
+  background-color: lightblue;
   height: 100vh;
   width: 100%;
 }
 
-.container__night {
+.weatherCard__night {
   text-align: center;
-  background-color: burlywood;
+  background-color: lightgray;
   height: 100vh;
   width: 100%;
 }

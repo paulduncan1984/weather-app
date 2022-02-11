@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchedWeather from "./SearchedWeather";
-import useSearchForecast from "../hooks/useSearchForecast";
 
 function SearchBar() {
   const [queryText, setQueryText] = useState("");

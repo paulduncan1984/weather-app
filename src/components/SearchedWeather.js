@@ -1,5 +1,4 @@
 import React from "react";
-// Hooks
 import useSearchForecast from "../hooks/useSearchForecast";
 import WeatherCard from "./WeatherCard";
 
@@ -11,10 +10,7 @@ function SearchedWeather() {
 
   console.log(weather);
   return (
-    <div>
-      <h1>SearchedWeather</h1>
-      {isLoaded ? <WeatherCard data={weather} /> : <p>Loading...</p>}
-    </div>
+    <div>{isLoaded ? <WeatherCard data={weather} /> : <p>Loading...</p>}</div>
   );
 }
 

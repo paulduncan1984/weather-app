@@ -17,7 +17,6 @@ function useLocalForecast() {
       window.navigator.geolocation.getCurrentPosition((position) => {
         setLat(position.coords.latitude);
         setLong(position.coords.longitude);
-        // console.log(lat, long);
       });
 
       await axios
@@ -32,7 +31,6 @@ function useLocalForecast() {
         .then((res) => {
           setLocalWeather(res.data);
           setIsloaded(true);
-          //   console.log(res.data);
         });
     };
     fetchLocalWeather();

@@ -11,29 +11,7 @@ function useSearchForecast(queryText) {
 
   console.log("Fired");
 
-  // useEffect(() => {
-  //   setIsloaded(false);
-  //   const fetchWeather = async () => {
-  //     await axios
-  //       .get(`${BASE_URL}`, {
-  //         params: {
-  //           q: queryText,
-  //           key: API_KEY,
-  //           days: 5,
-  //           lang: "en",
-  //         },
-  //       })
-  //       .then((res) => {
-  //         setWeather(res.data);
-  //         setIsloaded(true);
-  //         console.log(res.data);
-  //       });
-  //   };
-  //   fetchWeather();
-  // }, [queryText]);
-
   useEffect(() => {
-    console.log("useEffect started");
     setIsloaded(false);
     axios
       .get(BASE_URL, {
@@ -47,8 +25,6 @@ function useSearchForecast(queryText) {
       .then((res) => {
         setWeather(res.data);
         setIsloaded(true);
-        console.log("Is loaded = true");
-        console.log(res.data);
       });
   }, [queryText]);
 
