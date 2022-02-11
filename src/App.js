@@ -22,9 +22,11 @@ Friday 11th Feb:
 
 - Show local weather by default and search on submit - DONE
 - Get background toggle working - DONE
+- Added Google font Ubuntu - DONE
+- Install react icons - DONE
+- Add button (map icon) to return to home (default view)
 
 Backlog
- - Add button (map icon) to return to home (default view)
  - Add 3 day forecast
  - Add loading component
 
@@ -32,7 +34,8 @@ Backlog
   - Layout using flexbox 
   - Build WeatherCard out
 
-
+Pending decisions 
+  - Use API icons or use React icons
 
 
 1. Set up GIT - DONE
@@ -51,7 +54,8 @@ Backlog
    - Next 3 days of weather (tabbed)
 
  - How many screens
-   - 1 screen for default view and searched data
+   - screen for default view 
+   - screen for searched data
 
  - How many components
    - App to hold elements
