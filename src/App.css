@@ -22,17 +22,53 @@ body {
 }
 
 .weatherCard {
-  display: flex;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; */
 }
 
 .weatherCard__day {
-  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(to bottom right, red, yellow);
   height: 100vh;
   width: 100%;
 }
 
 .weatherCard__night {
-  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(to bottom right, purple, navy);
   height: 100vh;
   width: 100%;
+  color: white;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.input-box {
+  border-radius: 50px;
+  border: none;
+  width: 200px;
+  height: 30px;
+  padding-left: 10px;
+  margin: 10px 0 10px;
+  transition: width 0.4s;
+}
+
+.input-box:hover {
+  width: 210px;
+}
+
+.input-box:focus {
+  width: 210px;
+  outline: none;
+ 
 }

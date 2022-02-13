@@ -1,6 +1,6 @@
 import React from "react";
 import SearchBar from "./SearchBar";
-import { FaMapMarkerAlt, FaWind } from "react-icons/fa";
+import { FaBluetooth, FaMapMarkerAlt, FaWind } from "react-icons/fa";
 import { GiWaterDrop } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 
@@ -19,12 +19,15 @@ function WeatherCard(props) {
 
   return (
     <div className={`weatherCard${bgToggle()}`}>
+      <div className="search">
       <SearchBar />
-      <FaMapMarkerAlt onClick={() => navigate("/")} />
+      <FaMapMarkerAlt style={{color: "blue", marginTop: "15px", marginLeft: "5", fontSize: "20px"}}onClick={() => navigate("/")} />
+        </div>
+      
       <p>
         {props.data.location.name}, {props.data.location.country}
       </p>
-      <img src={props.data.current.condition.icon} />
+      <img style={{height: "150px"}} src={props.data.current.condition.icon} />
       <p>{props.data.current.condition.text}</p>
       <p>{props.data.current.temp_c}°C</p>
       <p>

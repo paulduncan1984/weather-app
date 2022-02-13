@@ -19,7 +19,8 @@ function SearchBar() {
     <div>
       <form onSubmit={handleSubmit}>
         <input
-          placeholder="Search by city name"
+        className="input-box"
+          placeholder="Search by city "
           type="text"
           onChange={handleChange}
         />
