@@ -18,13 +18,8 @@ export default App;
 
 /*
 
-Friday 11th Feb:
-
-- Show local weather by default and search on submit - DONE
-- Get background toggle working - DONE
-- Added Google font Ubuntu - DONE
-- Install react icons - DONE
-- Add button (map icon) to return to home (default view)
+Tuesday 
+- continue flushing out the icon function
 
 Backlog
  - Add 3 day forecast
