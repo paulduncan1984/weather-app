@@ -19,7 +19,11 @@ export default App;
 /*
 
 Tuesday 
-- continue flushing out the icon function
+- Display 3 day forecast (display max temp, day of week and icon)
+- Display current day's hourly forecast
+- Start styling
+
+Maybe: Save cities 
 
 Backlog
  - Add 3 day forecast

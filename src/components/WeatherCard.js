@@ -1,11 +1,12 @@
 import React from "react";
 import SearchBar from "./SearchBar";
-import { FaBluetooth, FaMapMarkerAlt, FaWind } from "react-icons/fa";
+import { FaBluetooth, FaMapMarkerAlt, FaWind, FaSmog } from "react-icons/fa";
 import { GiWaterDrop } from "react-icons/gi";
 
 // Weather icons
-import { WiDaySunny, WiDayRain, WiNightAltRain } from "react-icons/wi";
+import { WiDaySunny, WiDayRain, WiNightAltRain, WiDayCloudy, WiNightAltCloudy, WiDaySnow, WiNightSnow } from "react-icons/wi";
 import { BiMoon } from "react-icons/bi";
+import { RiMistFill } from "react-icons/ri"
 
 import { useNavigate } from "react-router-dom";
 
@@ -23,24 +24,29 @@ function WeatherCard(props) {
   };
 
   const iconDisplay = () => {
-    // if isDay ===1 && weather includes "rain" - return day-rain icon, else return night rain icon
-    // const isDay = props.data.current.isDay;
-    // const weather = props.data.current.condition.text;
+    const isDay = props.data.current.is_day;
+    const weather = props.data.current.condition.text;
 
-    const isDay = 0;
-    const weather = "rain";
+    // const isDay = 1;
+    // const weather = "Overcast";
 
     if (weather.includes("Sunny")) {
       return <WiDaySunny size={200} />;
-    } else if (weather.includes("clear")) {
+    } else if (weather.includes("Clear")) {
       return isDay === 1 ? <WiDaySunny size={200} /> : <BiMoon size={200} />;
     } else if (weather.includes("drizzle") || weather.includes("rain")) {
       return isDay === 1 ? (
         <WiDayRain size={200} />
       ) : (
         <WiNightAltRain size={200} />
-      );
-    }
+      ); 
+    } else if (weather.includes("Overcast") ||( weather.includes("cloud"))) {
+      return isDay === 1 ? <WiDayCloudy size={200} /> : <WiNightAltCloudy size={200} />   
+     } else if (weather.includes("snow")) {
+       return isDay === 0 ? <WiDaySnow size={200} /> : <WiNightSnow size={200} /> 
+     } else if (weather.includes("Mist")) {
+       return <FaSmog size={200} />
+     }
   };
 
   return (
