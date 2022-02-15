@@ -18,10 +18,14 @@ export default App;
 
 /*
 
-Tuesday 
-- Display 3 day forecast (display max temp, day of week and icon)
-- Display current day's hourly forecast
+Wednesday
+- Display current day's hourly forecast using a horizontal slider
 - Start styling
+
+- Display 3 day forecast (display max temp, day of week and icon) - DONE
+
+
+
 
 Maybe: Save cities 
 
