@@ -23,6 +23,8 @@ function WeatherCard(props) {
   const navigate = useNavigate();
 
   // Functions
+
+  // Background colour change
   const bgToggle = () => {
     const isDay = props.data.current.is_day;
     if (isDay === 1) {
@@ -32,6 +34,7 @@ function WeatherCard(props) {
     }
   };
 
+  // Icon change based on weather condition
   const iconDisplay = (weather, size) => {
     const isDay = props.data.current.is_day;
     // const isDay = 1;
@@ -64,11 +67,7 @@ function WeatherCard(props) {
     }
   };
 
-  // const day = 1644883200;
-  // const d = new Date(0);
-  // d.setUTCSeconds(day);
-  // console.log(d);
-
+  // Render day name based on epoch time from API
   const createDay = (timeStr) => {
     const day = new Date(0);
     day.setUTCSeconds(timeStr);
@@ -92,56 +91,94 @@ function WeatherCard(props) {
 
   return (
     <div className={`weatherCard${bgToggle()}`}>
-      <div className="search">
+      <div className="weatherCard__search">
         <SearchBar />
         <FaMapMarkerAlt
           style={{
-            color: "blue",
-            marginTop: "15px",
-            marginLeft: "5",
-            fontSize: "20px",
+            color: "white",
+            marginTop: "17.5px",
+            marginLeft: "12.5px",
+            fontSize: "35px",
           }}
           onClick={() => navigate("/")}
         />
       </div>
 
-      <p>
-        {props.data.location.name}, {props.data.location.country}
-      </p>
-      {/* <img
-        style={{ height: "150px" }}
-        src={props.data.current.condition.icon}
-      /> */}
-      <p>{iconDisplay(props.data.current.condition.text, 200)}</p>
-      <p>{props.data.current.condition.text}</p>
+      <div className="weatherCard__main">
+        <h1>
+          {props.data.location.name}, {props.data.location.country}
+        </h1>
+        <div className="weatherCard__main-icon-temp">
+          <h2>{Math.round(props.data.current.temp_c)}°</h2>
+          <icon className="icon-temp">
+            {iconDisplay(props.data.current.condition.text, 120)}
+          </icon>
+          <h3 className="weatherCard__main-description">
+            {props.data.current.condition.text}
+          </h3>
+          <div className="weatherCard__main-subinfo">
+            <p>
+              <FaWind style={{ marginRight: "10px" }} />
+              {Math.round(props.data.current.wind_kph)} kmp/h
+            </p>
+            <p>
+              <GiWaterDrop
+                style={{ marginRight: "10px", marginLeft: "40px" }}
+              />
+              {Math.round(props.data.current.precip_mm)} mm
+            </p>
+          </div>
+        </div>
+      </div>
 
-      <p>{props.data.current.temp_c}°C</p>
-      <p>
-        <FaWind />
-        {props.data.current.wind_kph} kmp/h
-      </p>
-      <p>
-        <GiWaterDrop />
-        {props.data.current.precip_mm} mm
-      </p>
+      <div className="daily-forecast">
+        <div className="daily-forecast__tile">
+          <p className="day">
+            {createDay(props.data.forecast.forecastday[0].date_epoch)}
+          </p>
+          <p className="day-icon">
+            {iconDisplay(
+              props.data.forecast.forecastday[0].day.condition.text,
+              30
+            )}
+          </p>
+          <p className="day-max">
+            {Math.round(props.data.forecast.forecastday[0].day.maxtemp_c)}
+          </p>
+          <p>{Math.round(props.data.forecast.forecastday[0].day.mintemp_c)}</p>
+        </div>
 
-      <p>{createDay(props.data.forecast.forecastday[0].date_epoch)}</p>
-      <p>
-        {iconDisplay(props.data.forecast.forecastday[0].day.condition.text, 50)}
-      </p>
-      <p>{props.data.forecast.forecastday[0].day.maxtemp_c}</p>
-
-      <p>{createDay(props.data.forecast.forecastday[1].date_epoch)}</p>
-      <p>
-        {iconDisplay(props.data.forecast.forecastday[1].day.condition.text, 50)}
-      </p>
-      <p>{props.data.forecast.forecastday[1].day.maxtemp_c}</p>
-
-      <p>{createDay(props.data.forecast.forecastday[2].date_epoch)}</p>
-      <p>
-        {iconDisplay(props.data.forecast.forecastday[2].day.condition.text, 50)}
-      </p>
-      <p>{props.data.forecast.forecastday[2].day.maxtemp_c}</p>
+        <div className="daily-forecast__tile">
+          <p className="day">
+            {createDay(props.data.forecast.forecastday[1].date_epoch)}
+          </p>
+          <p className="day-icon">
+            {iconDisplay(
+              props.data.forecast.forecastday[1].day.condition.text,
+              30
+            )}
+          </p>
+          <p className="day-max">
+            {Math.round(props.data.forecast.forecastday[1].day.maxtemp_c)}
+          </p>
+          <p>{Math.round(props.data.forecast.forecastday[1].day.mintemp_c)}</p>
+        </div>
+        <div className="daily-forecast__tile">
+          <p className="day">
+            {createDay(props.data.forecast.forecastday[2].date_epoch)}
+          </p>
+          <p className="day-icon">
+            {iconDisplay(
+              props.data.forecast.forecastday[2].day.condition.text,
+              30
+            )}
+          </p>
+          <p className="day-max">
+            {Math.round(props.data.forecast.forecastday[2].day.maxtemp_c)}
+          </p>
+          <p>{Math.round(props.data.forecast.forecastday[0].day.mintemp_c)}</p>
+        </div>
+      </div>
     </div>
   );
 }

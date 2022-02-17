@@ -18,11 +18,16 @@ export default App;
 
 /*
 
-Wednesday
+Friday 
 - Display current day's hourly forecast using a horizontal slider
-- Start styling
 
-- Display 3 day forecast (display max temp, day of week and icon) - DONE
+To do: 
+ - Add hover effect to Map button
+ - Build loading component
+ - Handle errors when typing a mistake
+
+Done:
+- Styled backgrounds - DONE
 
 
 
