@@ -24,7 +24,7 @@ function useLocalForecast() {
           params: {
             key: API_KEY,
             q: `${lat},${long}`,
-            days: 5,
+            days: 6,
             lang: "en",
           },
         })

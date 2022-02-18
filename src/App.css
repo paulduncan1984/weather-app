@@ -146,9 +146,9 @@ h2 {
   flex-direction: column;
   align-items: center;
   width: 65%;
-  margin-top: 50px;
+  margin-top: 15px;
   border-top: 1px solid rgba(255, 255, 255, 0.5);
-  padding-top: 15px;
+  padding-top: 20px;
 }
 
 .daily-forecast__tile {
@@ -173,4 +173,20 @@ h2 {
 .day-max {
   margin-right: 7%;
   font-weight: bold;
+}
+
+.weather-hourly {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  width: 65%;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  padding-top: 15px;
+}
+
+.hour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 40px;
 }

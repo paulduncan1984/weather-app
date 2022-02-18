@@ -72,6 +72,7 @@ function WeatherCard(props) {
     const day = new Date(0);
     day.setUTCSeconds(timeStr);
     const formatDay = String(day);
+    console.log(formatDay);
     if (formatDay.includes("Mon")) {
       return "Monday";
     } else if (formatDay.includes("Tue")) {
@@ -86,6 +87,63 @@ function WeatherCard(props) {
       return "Saturday";
     } else if (formatDay.includes("Sun")) {
       return "Sunday";
+    }
+  };
+
+  // Render hour based on epoch time
+
+  const createHour = (timeStr) => {
+    const day = new Date(0);
+    day.setUTCSeconds(timeStr);
+    const formatDay = String(day);
+    if (formatDay.includes("00:00:00")) {
+      return "12am";
+    } else if (formatDay.includes("01:")) {
+      return "1am";
+    } else if (formatDay.includes("02:")) {
+      return "2am";
+    } else if (formatDay.includes("03:")) {
+      return "3am";
+    } else if (formatDay.includes("04:")) {
+      return "4am";
+    } else if (formatDay.includes("05:")) {
+      return "5am";
+    } else if (formatDay.includes("06:")) {
+      return "6am";
+    } else if (formatDay.includes("07:")) {
+      return "7am";
+    } else if (formatDay.includes("08:")) {
+      return "8am";
+    } else if (formatDay.includes("09:")) {
+      return "9am";
+    } else if (formatDay.includes("10:")) {
+      return "10am";
+    } else if (formatDay.includes("11:")) {
+      return "11am";
+    } else if (formatDay.includes("12:")) {
+      return "12pm";
+    } else if (formatDay.includes("13:")) {
+      return "1pm";
+    } else if (formatDay.includes("14:")) {
+      return "2pm";
+    } else if (formatDay.includes("15:")) {
+      return "3pm";
+    } else if (formatDay.includes("16:")) {
+      return "4pm";
+    } else if (formatDay.includes("17:")) {
+      return "5pm";
+    } else if (formatDay.includes("18:")) {
+      return "6pm";
+    } else if (formatDay.includes("19:")) {
+      return "7pm";
+    } else if (formatDay.includes("20:")) {
+      return "8pm";
+    } else if (formatDay.includes("21:")) {
+      return "9pm";
+    } else if (formatDay.includes("22:")) {
+      return "10pm";
+    } else if (formatDay.includes("23:")) {
+      return "11pm";
     }
   };
 
@@ -128,6 +186,26 @@ function WeatherCard(props) {
               {Math.round(props.data.current.precip_mm)} mm
             </p>
           </div>
+        </div>
+      </div>
+
+      <div className="weather-hourly">
+        <div className="hour">
+          <p>
+            {createHour(props.data.forecast.forecastday[0].hour[0].time_epoch)}
+          </p>
+          <p className="day-max">
+            {Math.round(props.data.forecast.forecastday[0].hour[0].temp_c)}°
+          </p>
+        </div>
+
+        <div className="hour">
+          <p>
+            {createHour(props.data.forecast.forecastday[0].hour[1].time_epoch)}
+          </p>
+          <p className="day-max">
+            {Math.round(props.data.forecast.forecastday[0].hour[1].temp_c)}°
+          </p>
         </div>
       </div>
 
