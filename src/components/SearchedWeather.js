@@ -1,6 +1,7 @@
 import React from "react";
 import useSearchForecast from "../hooks/useSearchForecast";
 import WeatherCard from "./WeatherCard";
+import Loader from "./Loader";
 
 import { useParams } from "react-router-dom";
 
@@ -10,7 +11,7 @@ function SearchedWeather() {
 
   console.log(weather);
   return (
-    <div>{isLoaded ? <WeatherCard data={weather} /> : <p style={{color: "black"}}>Loading...</p>}</div>
+    <div>{isLoaded ? <WeatherCard data={weather} /> : <Loader />}</div>
   );
 }
 

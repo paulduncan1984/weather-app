@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import LocalWeather from "./components/LocalWeather";
 import SearchedWeather from "./components/SearchedWeather";
 
+
 function App() {
   return (
     <div className="container">
@@ -22,7 +23,6 @@ Monday
  - Refactor createDay and createHour
 
 To do: 
- - Build loading component
  - Handle errors when typing a mistake
 
 Maybe: Save cities 

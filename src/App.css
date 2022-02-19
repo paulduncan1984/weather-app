@@ -193,3 +193,7 @@ h2 {
   align-items: center;
   padding-right: 40px;
 }
+
+.loading {
+  margin-top: 300px;
+}
