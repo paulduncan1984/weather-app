@@ -9,7 +9,7 @@ function useSearchForecast(queryText) {
   const [isLoaded, setIsloaded] = useState(false);
   const [error, setError] = useState(null);
 
-  console.log("Fired");
+
 
   useEffect(() => {
     setIsloaded(false);

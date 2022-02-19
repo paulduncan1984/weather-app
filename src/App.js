@@ -18,30 +18,13 @@ export default App;
 
 /*
 
-Friday 
-- Display current day's hourly forecast using a horizontal slider
- - Write a function that takes the time and produces JSX containing a div that displays both time (converted to "Xam/pm") and temp_c
- - This functions only executes if the time passed into the function is equal to or greater than current time 
-
- const hours = (timeStr) => {
-  const currentTime = get time JS method;
-  if (currentTime >= timeStr) {
-    retrun  - logic here
-  }
- }
-
- Refactor createHour into a Loop
+Monday 
+ - Refactor createDay and createHour
 
 To do: 
  - Add hover effect to Map button
  - Build loading component
  - Handle errors when typing a mistake
-
-Done:
-- Styled backgrounds - DONE
-
-
-
 
 Maybe: Save cities 
 

@@ -10,7 +10,7 @@ function SearchedWeather() {
 
   console.log(weather);
   return (
-    <div>{isLoaded ? <WeatherCard data={weather} /> : <p>Loading...</p>}</div>
+    <div>{isLoaded ? <WeatherCard data={weather} /> : <p style={{color: "black"}}>Loading...</p>}</div>
   );
 }
 

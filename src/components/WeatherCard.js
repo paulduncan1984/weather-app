@@ -23,7 +23,6 @@ function WeatherCard(props) {
   const navigate = useNavigate();
 
   // Functions
-
   // Background colour change
   const bgToggle = () => {
     const isDay = props.data.current.is_day;
@@ -32,13 +31,11 @@ function WeatherCard(props) {
     } else {
       return "__night";
     }
-  };
+  }; // EO bgToggle 
 
   // Icon change based on weather condition
   const iconDisplay = (weather, size) => {
     const isDay = props.data.current.is_day;
-    // const isDay = 1;
-    // const weather = "Overcast";
 
     if (weather.includes("Sunny")) {
       return <WiDaySunny size={size} />;
@@ -65,14 +62,14 @@ function WeatherCard(props) {
     } else if (weather.includes("Mist")) {
       return <FaSmog size={size} />;
     }
-  };
+  }; // EO iconChange
 
   // Render day name based on epoch time from API
   const createDay = (timeStr) => {
     const day = new Date(0);
     day.setUTCSeconds(timeStr);
     const formatDay = String(day);
-    console.log(formatDay);
+    // console.log(formatDay);
     if (formatDay.includes("Mon")) {
       return "Monday";
     } else if (formatDay.includes("Tue")) {
@@ -88,64 +85,77 @@ function WeatherCard(props) {
     } else if (formatDay.includes("Sun")) {
       return "Sunday";
     }
-  };
+  }; // EO createDay
 
-  // Render hour based on epoch time
-
+  // Render hour based on time
   const createHour = (timeStr) => {
-    const day = new Date(0);
-    day.setUTCSeconds(timeStr);
-    const formatDay = String(day);
-    if (formatDay.includes("00:00:00")) {
+    console.log(typeof timeStr)
+    if (timeStr.includes("00:00:00")) {
       return "12am";
-    } else if (formatDay.includes("01:")) {
+    } else if (timeStr.includes("01:")) {
       return "1am";
-    } else if (formatDay.includes("02:")) {
+    } else if (timeStr.includes("02:")) {
       return "2am";
-    } else if (formatDay.includes("03:")) {
+    } else if (timeStr.includes("03:")) {
       return "3am";
-    } else if (formatDay.includes("04:")) {
+    } else if (timeStr.includes("04:")) {
       return "4am";
-    } else if (formatDay.includes("05:")) {
+    } else if (timeStr.includes("05:")) {
       return "5am";
-    } else if (formatDay.includes("06:")) {
+    } else if (timeStr.includes("06:")) {
       return "6am";
-    } else if (formatDay.includes("07:")) {
+    } else if (timeStr.includes("07:")) {
       return "7am";
-    } else if (formatDay.includes("08:")) {
+    } else if (timeStr.includes("08:")) {
       return "8am";
-    } else if (formatDay.includes("09:")) {
+    } else if (timeStr.includes("09:")) {
       return "9am";
-    } else if (formatDay.includes("10:")) {
+    } else if (timeStr.includes("10:")) {
       return "10am";
-    } else if (formatDay.includes("11:")) {
+    } else if (timeStr.includes("11:")) {
       return "11am";
-    } else if (formatDay.includes("12:")) {
+    } else if (timeStr.includes("12:")) {
       return "12pm";
-    } else if (formatDay.includes("13:")) {
+    } else if (timeStr.includes("13:")) {
       return "1pm";
-    } else if (formatDay.includes("14:")) {
+    } else if (timeStr.includes("14:")) {
       return "2pm";
-    } else if (formatDay.includes("15:")) {
+    } else if (timeStr.includes("15:")) {
       return "3pm";
-    } else if (formatDay.includes("16:")) {
+    } else if (timeStr.includes("16:")) {
       return "4pm";
-    } else if (formatDay.includes("17:")) {
+    } else if (timeStr.includes("17:")) {
       return "5pm";
-    } else if (formatDay.includes("18:")) {
+    } else if (timeStr.includes("18:")) {
       return "6pm";
-    } else if (formatDay.includes("19:")) {
+    } else if (timeStr.includes("19:")) {
       return "7pm";
-    } else if (formatDay.includes("20:")) {
+    } else if (timeStr.includes("20:")) {
       return "8pm";
-    } else if (formatDay.includes("21:")) {
+    } else if (timeStr.includes("21:")) {
       return "9pm";
-    } else if (formatDay.includes("22:")) {
+    } else if (timeStr.includes("22:")) {
       return "10pm";
-    } else if (formatDay.includes("23:")) {
+    } else if (timeStr.includes("23:")) {
       return "11pm";
     }
-  };
+  }; // EO createHour
+
+  // Render JSX for hourly forecast
+  const createHourly = (apiTime) => {
+     const localTime = props.data.location.localtime_epoch;
+     const hourly = apiTime.map((x) => {
+     if (x.time_epoch > localTime) {
+       return (
+         <div className="hour">
+            <p>{createHour(x.time)}</p>
+            <p className="day-max">{Math.round(x.temp_c)}</p>
+         </div>
+       )} 
+     })
+
+     return hourly
+  } // EO createHourly
 
   return (
     <div className={`weatherCard${bgToggle()}`}>
@@ -157,12 +167,14 @@ function WeatherCard(props) {
             marginTop: "17.5px",
             marginLeft: "12.5px",
             fontSize: "35px",
+            cursor: "pointer",
           }}
           onClick={() => navigate("/")}
         />
       </div>
 
       <div className="weatherCard__main">
+        
         <h1>
           {props.data.location.name}, {props.data.location.country}
         </h1>
@@ -190,23 +202,7 @@ function WeatherCard(props) {
       </div>
 
       <div className="weather-hourly">
-        <div className="hour">
-          <p>
-            {createHour(props.data.forecast.forecastday[0].hour[0].time_epoch)}
-          </p>
-          <p className="day-max">
-            {Math.round(props.data.forecast.forecastday[0].hour[0].temp_c)}°
-          </p>
-        </div>
-
-        <div className="hour">
-          <p>
-            {createHour(props.data.forecast.forecastday[0].hour[1].time_epoch)}
-          </p>
-          <p className="day-max">
-            {Math.round(props.data.forecast.forecastday[0].hour[1].temp_c)}°
-          </p>
-        </div>
+        {createHourly(props.data.forecast.forecastday[0].hour)}
       </div>
 
       <div className="daily-forecast">
