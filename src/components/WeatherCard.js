@@ -170,6 +170,8 @@ function WeatherCard(props) {
             cursor: "pointer",
           }}
           onClick={() => navigate("/")}
+          onMouseOver={({target})=>target.style.color="lightgrey"}
+          onMouseOut={({target})=>target.style.color="white"}
         />
       </div>
 

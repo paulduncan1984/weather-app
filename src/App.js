@@ -22,7 +22,6 @@ Monday
  - Refactor createDay and createHour
 
 To do: 
- - Add hover effect to Map button
  - Build loading component
  - Handle errors when typing a mistake
 
