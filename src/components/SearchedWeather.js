@@ -7,12 +7,10 @@ import { useParams } from "react-router-dom";
 
 function SearchedWeather() {
   const params = useParams();
-  const { weather, isLoaded, error } = useSearchForecast(params.queryText);
+  const { weather, isLoaded } = useSearchForecast(params.queryText);
 
-  console.log(weather);
-  return (
-    <div>{isLoaded ? <WeatherCard data={weather} /> : <Loader />}</div>
-  );
+  // console.log(weather);
+  return <div>{isLoaded ? <WeatherCard data={weather} /> : <Loader />}</div>;
 }
 
 export default SearchedWeather;

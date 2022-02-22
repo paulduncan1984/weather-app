@@ -1,5 +1,6 @@
 import React from "react";
 import SearchBar from "./SearchBar";
+import useSearchForecast from "../hooks/useSearchForecast";
 import { FaBluetooth, FaMapMarkerAlt, FaWind, FaSmog } from "react-icons/fa";
 import { GiWaterDrop } from "react-icons/gi";
 
@@ -21,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 function WeatherCard(props) {
   console.log(props);
   const navigate = useNavigate();
+  // const { error } = useSearchForecast();
 
   // Functions
   // Background colour change
@@ -31,7 +33,7 @@ function WeatherCard(props) {
     } else {
       return "__night";
     }
-  }; // EO bgToggle 
+  }; // EO bgToggle
 
   // Icon change based on weather condition
   const iconDisplay = (weather, size) => {
@@ -89,7 +91,6 @@ function WeatherCard(props) {
 
   // Render hour based on time
   const createHour = (timeStr) => {
-    console.log(typeof timeStr)
     if (timeStr.includes("00:00:00")) {
       return "12am";
     } else if (timeStr.includes("01:")) {
@@ -143,19 +144,20 @@ function WeatherCard(props) {
 
   // Render JSX for hourly forecast
   const createHourly = (apiTime) => {
-     const localTime = props.data.location.localtime_epoch;
-     const hourly = apiTime.map((x) => {
-     if (x.time_epoch > localTime) {
-       return (
-         <div className="hour">
+    const localTime = props.data.location.localtime_epoch;
+    const hourly = apiTime.map((x) => {
+      if (x.time_epoch > localTime) {
+        return (
+          <div className="hour">
             <p>{createHour(x.time)}</p>
             <p className="day-max">{Math.round(x.temp_c)}</p>
-         </div>
-       )} 
-     })
+          </div>
+        );
+      }
+    });
 
-     return hourly
-  } // EO createHourly
+    return hourly;
+  }; // EO createHourly
 
   return (
     <div className={`weatherCard${bgToggle()}`}>
@@ -170,13 +172,14 @@ function WeatherCard(props) {
             cursor: "pointer",
           }}
           onClick={() => navigate("/")}
-          onMouseOver={({target})=>target.style.color="lightgrey"}
-          onMouseOut={({target})=>target.style.color="white"}
+          onMouseOver={({ target }) => (target.style.color = "lightgrey")}
+          onMouseOut={({ target }) => (target.style.color = "white")}
         />
+
+        {/* <p>{error.length > 0 ? <p>Error: {error}</p> : ""}</p> */}
       </div>
 
       <div className="weatherCard__main">
-        
         <h1>
           {props.data.location.name}, {props.data.location.country}
         </h1>

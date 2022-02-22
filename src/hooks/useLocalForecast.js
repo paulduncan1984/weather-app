@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const BASE_URL = "http://api.weatherapi.com/v1/forecast.json?";
+const BASE_URL = "https://api.weatherapi.com/v1/forecast.json?";
 const API_KEY = process.env.REACT_APP_WAPI_KEY;
 
 function useLocalForecast() {
@@ -9,7 +9,7 @@ function useLocalForecast() {
   const [long, setLong] = useState([]);
   const [localWeather, setLocalWeather] = useState(null);
   const [isLoaded, setIsloaded] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState([]);
 
   useEffect(() => {
     setIsloaded(false);
@@ -31,6 +31,9 @@ function useLocalForecast() {
         .then((res) => {
           setLocalWeather(res.data);
           setIsloaded(true);
+        })
+        .catch((err) => {
+          setError(err.response.data.error.message);
         });
     };
     fetchLocalWeather();
