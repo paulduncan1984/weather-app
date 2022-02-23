@@ -1,10 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import useSearchForecast from "../hooks/useSearchForecast";
-import { FaBluetooth, FaMapMarkerAlt, FaWind, FaSmog } from "react-icons/fa";
-import { GiWaterDrop } from "react-icons/gi";
-
 // Weather icons
+import { FaMapMarkerAlt, FaWind, FaSmog } from "react-icons/fa";
+import { GiWaterDrop } from "react-icons/gi";
+import { BiMoon } from "react-icons/bi";
 import {
   WiDaySunny,
   WiDayRain,
@@ -14,15 +14,10 @@ import {
   WiDaySnow,
   WiNightSnow,
 } from "react-icons/wi";
-import { BiMoon } from "react-icons/bi";
-import { RiMistFill } from "react-icons/ri";
-
-import { useNavigate } from "react-router-dom";
 
 function WeatherCard(props) {
   console.log(props);
   const navigate = useNavigate();
-  // const { error } = useSearchForecast();
 
   // Functions
   // Background colour change
@@ -64,98 +59,39 @@ function WeatherCard(props) {
     } else if (weather.includes("Mist")) {
       return <FaSmog size={size} />;
     }
-  }; // EO iconChange
+  }; // EO iconDispaly
 
   // Render day name based on epoch time from API
   const createDay = (timeStr) => {
     const day = new Date(0);
     day.setUTCSeconds(timeStr);
-    const formatDay = String(day);
-    // console.log(formatDay);
-    if (formatDay.includes("Mon")) {
-      return "Monday";
-    } else if (formatDay.includes("Tue")) {
-      return "Tuesday";
-    } else if (formatDay.includes("Wed")) {
-      return "Wednesday";
-    } else if (formatDay.includes("Thu")) {
-      return "Thursday";
-    } else if (formatDay.includes("Fri")) {
-      return "Friday";
-    } else if (formatDay.includes("Sat")) {
-      return "Saturday";
-    } else if (formatDay.includes("Sun")) {
-      return "Sunday";
-    }
+    return day.toLocaleDateString("en-US", { weekday: "long" });
   }; // EO createDay
 
   // Render hour based on time
   const createHour = (timeStr) => {
-    if (timeStr.includes("00:00:00")) {
-      return "12am";
-    } else if (timeStr.includes("01:")) {
-      return "1am";
-    } else if (timeStr.includes("02:")) {
-      return "2am";
-    } else if (timeStr.includes("03:")) {
-      return "3am";
-    } else if (timeStr.includes("04:")) {
-      return "4am";
-    } else if (timeStr.includes("05:")) {
-      return "5am";
-    } else if (timeStr.includes("06:")) {
-      return "6am";
-    } else if (timeStr.includes("07:")) {
-      return "7am";
-    } else if (timeStr.includes("08:")) {
-      return "8am";
-    } else if (timeStr.includes("09:")) {
-      return "9am";
-    } else if (timeStr.includes("10:")) {
-      return "10am";
-    } else if (timeStr.includes("11:")) {
-      return "11am";
-    } else if (timeStr.includes("12:")) {
-      return "12pm";
-    } else if (timeStr.includes("13:")) {
-      return "1pm";
-    } else if (timeStr.includes("14:")) {
-      return "2pm";
-    } else if (timeStr.includes("15:")) {
-      return "3pm";
-    } else if (timeStr.includes("16:")) {
-      return "4pm";
-    } else if (timeStr.includes("17:")) {
-      return "5pm";
-    } else if (timeStr.includes("18:")) {
-      return "6pm";
-    } else if (timeStr.includes("19:")) {
-      return "7pm";
-    } else if (timeStr.includes("20:")) {
-      return "8pm";
-    } else if (timeStr.includes("21:")) {
-      return "9pm";
-    } else if (timeStr.includes("22:")) {
-      return "10pm";
-    } else if (timeStr.includes("23:")) {
-      return "11pm";
-    }
+    const time = new Date(timeStr);
+    console.log(time);
+
+    return time.toLocaleTimeString("en-GB", {
+      hour: "numeric",
+      hour12: "false",
+    });
   }; // EO createHour
 
   // Render JSX for hourly forecast
   const createHourly = (apiTime) => {
     const localTime = props.data.location.localtime_epoch;
-    const hourly = apiTime.map((x) => {
-      if (x.time_epoch > localTime) {
+    const hourly = apiTime.map((data) => {
+      if (data.time_epoch > localTime) {
         return (
           <div className="hour">
-            <p>{createHour(x.time)}</p>
-            <p className="day-max">{Math.round(x.temp_c)}</p>
+            <p className="format-hour">{createHour(data.time)}</p>
+            <p className="day-max">{Math.round(data.temp_c)}</p>
           </div>
         );
       }
     });
-
     return hourly;
   }; // EO createHourly
 
