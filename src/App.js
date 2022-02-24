@@ -5,7 +5,7 @@ import SearchedWeather from "./components/SearchedWeather";
 
 function App() {
   return (
-    <div className="container">
+    <div>
       <Routes>
         <Route path="/" element={<LocalWeather />} />
         <Route path="/search/:queryText" element={<SearchedWeather />} />
@@ -19,11 +19,13 @@ export default App;
 /*
 
 Thursday
+ - Create a function to produce 3 day forecast - IS THIS REALLY NEEDED? 
  - Remove console logs
  - Remove unused imports 
  - Fix CSS
-  - naming convention
-  - Sizes etc
+  - naming convention - IN PROGRESS
+  - convert ox to rem
+  - Fix sizing 
 
 To do: 
  - Handle errors when typing a mistake

@@ -24,9 +24,9 @@ function WeatherCard(props) {
   const bgToggle = () => {
     const isDay = props.data.current.is_day;
     if (isDay === 1) {
-      return "__day";
+      return "weather-card--day";
     } else {
-      return "__night";
+      return "weather-card--night";
     }
   }; // EO bgToggle
 
@@ -85,9 +85,9 @@ function WeatherCard(props) {
     const hourly = apiTime.map((data) => {
       if (data.time_epoch > localTime) {
         return (
-          <div className="hour">
-            <p className="format-hour">{createHour(data.time)}</p>
-            <p className="day-max">{Math.round(data.temp_c)}</p>
+          <div className="weather-card__hour">
+            <p className="weather-card__format-hour">{createHour(data.time)}</p>
+            <p className="weather-card__max-temp">{Math.round(data.temp_c)}</p>
           </div>
         );
       }
@@ -95,9 +95,30 @@ function WeatherCard(props) {
     return hourly;
   }; // EO createHourly
 
+  // 3 day weather function
+
+  // INSERT FUNCTION TO PRODUCE THE BELOW JSX
+  /* 
+  <div className="daily-forecast__tile">
+          <p className="day">
+            {createDay(props.data.forecast.forecastday[0].date_epoch)}
+          </p>
+          <p className="day-icon">
+            {iconDisplay(
+              props.data.forecast.forecastday[0].day.condition.text,
+              30
+            )}
+          </p>
+          <p className="day-max">
+            {Math.round(props.data.forecast.forecastday[0].day.maxtemp_c)}
+          </p>
+          <p>{Math.round(props.data.forecast.forecastday[0].day.mintemp_c)}</p>
+        </div>
+  */
+
   return (
-    <div className={`weatherCard${bgToggle()}`}>
-      <div className="weatherCard__search">
+    <div className={`weather-card ${bgToggle()}`}>
+      <div className="search">
         <SearchBar />
         <FaMapMarkerAlt
           style={{
@@ -111,23 +132,21 @@ function WeatherCard(props) {
           onMouseOver={({ target }) => (target.style.color = "lightgrey")}
           onMouseOut={({ target }) => (target.style.color = "white")}
         />
-
-        {/* <p>{error.length > 0 ? <p>Error: {error}</p> : ""}</p> */}
       </div>
 
-      <div className="weatherCard__main">
+      <div className="weather-card__main">
         <h1>
           {props.data.location.name}, {props.data.location.country}
         </h1>
-        <div className="weatherCard__main-icon-temp">
+        <div className="weather-card__temp">
           <h2>{Math.round(props.data.current.temp_c)}°</h2>
-          <icon className="icon-temp">
+          <span className="weather-card__icon">
             {iconDisplay(props.data.current.condition.text, 120)}
-          </icon>
-          <h3 className="weatherCard__main-description">
+          </span>
+          <h3 className="weather-card__description">
             {props.data.current.condition.text}
           </h3>
-          <div className="weatherCard__main-subinfo">
+          <div className="weather-card__subinfo">
             <p>
               <FaWind style={{ marginRight: "10px" }} />
               {Math.round(props.data.current.wind_kph)} kmp/h
@@ -142,7 +161,7 @@ function WeatherCard(props) {
         </div>
       </div>
 
-      <div className="weather-hourly">
+      <div className="weather-card__weather-hourly">
         {createHourly(props.data.forecast.forecastday[0].hour)}
       </div>
 
