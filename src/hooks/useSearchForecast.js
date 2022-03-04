@@ -21,7 +21,6 @@ function useSearchForecast(queryText) {
         },
       })
       .then((res) => {
-        console.log("FIRED");
         setWeather(res.data);
         setIsloaded(true);
         setError([]);

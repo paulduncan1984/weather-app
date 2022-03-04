@@ -34,6 +34,7 @@ function useLocalForecast() {
         })
         .catch((err) => {
           setError(err.response.data.error.message);
+          console.log(error);
         });
     };
     fetchLocalWeather();

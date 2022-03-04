@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import WeatherCard from "./WeatherCard";
 import useLocalForecast from "../hooks/useLocalForecast";
 import Loader from "./Loader";
 
-function LocalWeather({ ...props }) {
+function LocalWeather() {
   const { localWeather, isLoaded } = useLocalForecast();
 
   return (

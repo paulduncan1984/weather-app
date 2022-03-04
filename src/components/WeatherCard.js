@@ -16,10 +16,8 @@ import {
 } from "react-icons/wi";
 
 function WeatherCard(props) {
-  console.log(props);
   const navigate = useNavigate();
 
-  // Functions
   // Background colour change
   const bgToggle = () => {
     const isDay = props.data.current.is_day;
@@ -71,8 +69,6 @@ function WeatherCard(props) {
   // Render hour based on time
   const createHour = (timeStr) => {
     const time = new Date(timeStr);
-    console.log(time);
-
     return time.toLocaleTimeString("en-GB", {
       hour: "numeric",
       hour12: "false",
@@ -95,122 +91,109 @@ function WeatherCard(props) {
     return hourly;
   }; // EO createHourly
 
-  // 3 day weather function
-
-  // INSERT FUNCTION TO PRODUCE THE BELOW JSX
-  /* 
-  <div className="daily-forecast__tile">
-          <p className="day">
-            {createDay(props.data.forecast.forecastday[0].date_epoch)}
-          </p>
-          <p className="day-icon">
-            {iconDisplay(
-              props.data.forecast.forecastday[0].day.condition.text,
-              30
-            )}
-          </p>
-          <p className="day-max">
-            {Math.round(props.data.forecast.forecastday[0].day.maxtemp_c)}
-          </p>
-          <p>{Math.round(props.data.forecast.forecastday[0].day.mintemp_c)}</p>
-        </div>
-  */
-
   return (
     <div className={`weather-card ${bgToggle()}`}>
-      <div className="search">
-        <SearchBar />
-        <FaMapMarkerAlt
-          style={{
-            color: "white",
-            marginTop: "17.5px",
-            marginLeft: "12.5px",
-            fontSize: "35px",
-            cursor: "pointer",
-          }}
-          onClick={() => navigate("/")}
-          onMouseOver={({ target }) => (target.style.color = "lightgrey")}
-          onMouseOut={({ target }) => (target.style.color = "white")}
-        />
-      </div>
+      <div className="container">
+        <div className="search">
+          <SearchBar />
+          <FaMapMarkerAlt
+            style={{
+              color: "white",
+              marginTop: "1.1rem",
+              marginLeft: "0.7rem",
+              fontSize: "2rem",
+              cursor: "pointer",
+            }}
+            onClick={() => navigate("/")}
+            onMouseOver={({ target }) => (target.style.color = "lightgrey")}
+            onMouseOut={({ target }) => (target.style.color = "white")}
+          />
+        </div>
 
-      <div className="weather-card__main">
-        <h1>
-          {props.data.location.name}, {props.data.location.country}
-        </h1>
-        <div className="weather-card__temp">
-          <h2>{Math.round(props.data.current.temp_c)}°</h2>
-          <span className="weather-card__icon">
-            {iconDisplay(props.data.current.condition.text, 120)}
-          </span>
-          <h3 className="weather-card__description">
-            {props.data.current.condition.text}
-          </h3>
-          <div className="weather-card__subinfo">
-            <p>
-              <FaWind style={{ marginRight: "10px" }} />
-              {Math.round(props.data.current.wind_kph)} kmp/h
-            </p>
-            <p>
-              <GiWaterDrop
-                style={{ marginRight: "10px", marginLeft: "40px" }}
-              />
-              {Math.round(props.data.current.precip_mm)} mm
-            </p>
+        <div className="weather-card__main">
+          <h1>
+            {props.data.location.name}, {props.data.location.country}
+          </h1>
+          <div className="weather-card__temp">
+            <h2>{Math.round(props.data.current.temp_c)}°</h2>
+            <span className="weather-card__icon">
+              {iconDisplay(props.data.current.condition.text, 120)}
+            </span>
+            <h3 className="weather-card__description">
+              {props.data.current.condition.text}
+            </h3>
+            <div className="weather-card__subinfo">
+              <p>
+                <FaWind style={{ marginRight: "10px" }} />
+                {Math.round(props.data.current.wind_kph)} kmp/h
+              </p>
+              <p>
+                <GiWaterDrop
+                  style={{ marginRight: "10px", marginLeft: "40px" }}
+                />
+                {Math.round(props.data.current.precip_mm)} mm
+              </p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="weather-card__weather-hourly">
-        {createHourly(props.data.forecast.forecastday[0].hour)}
-      </div>
-
-      <div className="daily-forecast">
-        <div className="daily-forecast__tile">
-          <p className="day">
-            {createDay(props.data.forecast.forecastday[0].date_epoch)}
-          </p>
-          <p className="day-icon">
-            {iconDisplay(
-              props.data.forecast.forecastday[0].day.condition.text,
-              30
-            )}
-          </p>
-          <p className="day-max">
-            {Math.round(props.data.forecast.forecastday[0].day.maxtemp_c)}
-          </p>
-          <p>{Math.round(props.data.forecast.forecastday[0].day.mintemp_c)}</p>
+        <div className="weather-card__weather-hourly">
+          {createHourly(props.data.forecast.forecastday[0].hour)}
         </div>
 
-        <div className="daily-forecast__tile">
-          <p className="day">
-            {createDay(props.data.forecast.forecastday[1].date_epoch)}
-          </p>
-          <p className="day-icon">
-            {iconDisplay(
-              props.data.forecast.forecastday[1].day.condition.text,
-              30
-            )}
-          </p>
-          <p className="day-max">
-            {Math.round(props.data.forecast.forecastday[1].day.maxtemp_c)}
-          </p>
-          <p>{Math.round(props.data.forecast.forecastday[1].day.mintemp_c)}</p>
-        </div>
-        <div className="daily-forecast__tile">
-          <p className="day">
-            {createDay(props.data.forecast.forecastday[2].date_epoch)}
-          </p>
-          <p className="day-icon">
-            {iconDisplay(
-              props.data.forecast.forecastday[2].day.condition.text,
-              30
-            )}
-          </p>
-          <p className="day-max">
-            {Math.round(props.data.forecast.forecastday[2].day.maxtemp_c)}
-          </p>
-          <p>{Math.round(props.data.forecast.forecastday[0].day.mintemp_c)}</p>
+        <div className="weather-card__daily-forecast">
+          <div className="weather-card__tile">
+            <p className="weather-card__day">
+              {createDay(props.data.forecast.forecastday[0].date_epoch)}
+            </p>
+            <p className="weather-card__day-icon">
+              {iconDisplay(
+                props.data.forecast.forecastday[0].day.condition.text,
+                30
+              )}
+            </p>
+            <p className="weather-card__day-max">
+              {Math.round(props.data.forecast.forecastday[0].day.maxtemp_c)}
+            </p>
+            <p>
+              {Math.round(props.data.forecast.forecastday[0].day.mintemp_c)}
+            </p>
+          </div>
+
+          <div className="weather-card__tile">
+            <p className="weather-card__day">
+              {createDay(props.data.forecast.forecastday[1].date_epoch)}
+            </p>
+            <p className="weather-card__day-icon">
+              {iconDisplay(
+                props.data.forecast.forecastday[1].day.condition.text,
+                30
+              )}
+            </p>
+            <p className="weather-card__day-max">
+              {Math.round(props.data.forecast.forecastday[1].day.maxtemp_c)}
+            </p>
+            <p>
+              {Math.round(props.data.forecast.forecastday[1].day.mintemp_c)}
+            </p>
+          </div>
+          <div className="weather-card__tile">
+            <p className="weather-card__day">
+              {createDay(props.data.forecast.forecastday[2].date_epoch)}
+            </p>
+            <p className="weather-card__day-icon">
+              {iconDisplay(
+                props.data.forecast.forecastday[2].day.condition.text,
+                30
+              )}
+            </p>
+            <p className="weather-card__day-max">
+              {Math.round(props.data.forecast.forecastday[2].day.maxtemp_c)}
+            </p>
+            <p>
+              {Math.round(props.data.forecast.forecastday[0].day.mintemp_c)}
+            </p>
+          </div>
         </div>
       </div>
     </div>

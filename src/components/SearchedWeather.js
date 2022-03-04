@@ -9,7 +9,6 @@ function SearchedWeather() {
   const params = useParams();
   const { weather, isLoaded } = useSearchForecast(params.queryText);
 
-  // console.log(weather);
   return <div>{isLoaded ? <WeatherCard data={weather} /> : <Loader />}</div>;
 }
 
