@@ -6,7 +6,7 @@ import SearchedWeather from "./components/SearchedWeather";
 function App() {
   return (
     <div>
-      <Routes>
+      <Routes basename={"/weather-app/"}>
         <Route path="/" element={<LocalWeather />} />
         <Route path="/search/:queryText" element={<SearchedWeather />} />
       </Routes>
