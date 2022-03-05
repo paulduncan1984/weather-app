@@ -68,7 +68,7 @@ function WeatherCard(props) {
 
   // Render hour based on time
   const createHour = (timeStr) => {
-    const time = new Date(timeStr);
+    const time = new Date(timeStr.replace(/-/g, "/"));
     return time.toLocaleTimeString("en-US", {
       hour: "numeric",
       hour12: "false",
